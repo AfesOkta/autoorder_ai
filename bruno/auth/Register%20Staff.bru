@@ -1,0 +1,18 @@
+meta {
+  name: Register Staff
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/auth/register-staff
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "email": "staff1@tenant1.com",
+    "password": "password123"
+  }
+}

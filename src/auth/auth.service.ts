@@ -9,6 +9,8 @@ import * as crypto from "crypto";
 import { PrismaService } from "../prisma/prisma.service";
 import { RegisterDto } from "./dto/register.dto";
 import { LoginDto } from "./dto/login.dto";
+import { CreateStaffDto } from "./dto/create-staff.dto";
+import { UserRole } from "@prisma/client";
 
 // Rate limiting configuration
 const MAX_LOGIN_ATTEMPTS = 5;
@@ -134,6 +136,39 @@ export class AuthService {
         role: result.user.role,
       },
       accessToken: token,
+    };
+  }
+
+  async createStaff(createStaffDto: CreateStaffDto, tenantId: string) {
+    const { email, password } = createStaffDto;
+
+    // Check if user with email already exists
+    const existingUser = await this.prisma.user.findFirst({
+      where: { email },
+    });
+
+    if (existingUser) {
+      throw new ConflictException("User with this email already exists");
+    }
+
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create staff user
+    const user = await this.prisma.user.create({
+      data: {
+        tenantId,
+        email,
+        password: hashedPassword,
+        role: UserRole.STAFF,
+      },
+    });
+
+    return {
+      id: user.id,
+      email: user.email,
+      role: user.role,
+      tenantId: user.tenantId,
     };
   }
 
