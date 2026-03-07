@@ -68,6 +68,7 @@ Production-ready MVP backend for AutoOrder AI - a SaaS platform that converts Wh
 
 ### Auth
 - `POST /auth/register` - Register new tenant and admin user
+- `POST /auth/register-staff` - Register new staff (Tenant/Admin only)
 - `POST /auth/login` - Login and get JWT token (saves Superadmin key if applicable)
 - `GET /auth/me` - Get current user profile
 

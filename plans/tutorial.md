@@ -35,6 +35,10 @@ Now, a business owner (Tenant) can register using the plan you just created.
 2.  **Login as Tenant Admin**:
     - Go to `auth -> Login` using the tenant's email/password.
     - This saves the `jwtToken` for all subsequent requests.
+3.  **Register Staff (Optional)**:
+    - If you are a Tenant and want to add staff, go to `auth -> Register Staff`.
+    - Provide `email` and `password` for the staff member.
+    - Run the request. The staff will be linked to your `tenantId`.
 
 ---
 
