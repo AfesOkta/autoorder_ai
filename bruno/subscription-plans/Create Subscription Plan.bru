@@ -1,0 +1,36 @@
+meta {
+  name: Create Subscription Plan
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/subscriptions
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  Authorization: Bearer {{jwtToken}}
+}
+
+body:json {
+  {
+    "name": "PROFESIONAL",
+    "price": 100000,
+    "features": {
+      "maxDevices": 5,
+      "maxProducts": 150
+    }
+  }
+}
+
+script:post-response {
+  if (res.status === 201) {
+    const body = res.body;
+    if (body.id) {
+      bru.setEnvVar('tempSubscriptionId', body.id);
+    }
+  }
+}

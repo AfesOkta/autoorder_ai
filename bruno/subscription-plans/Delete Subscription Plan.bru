@@ -1,0 +1,15 @@
+meta {
+  name: Delete Subscription Plan
+  type: http
+  seq: 5
+}
+
+delete {
+  url: {{baseUrl}}/subscriptions/{{subscriptionId}}
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{jwtToken}}
+}

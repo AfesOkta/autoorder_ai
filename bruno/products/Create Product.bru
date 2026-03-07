@@ -1,0 +1,39 @@
+meta {
+  name: Create Product
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/products
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  Authorization: Bearer {{jwtToken}}
+}
+
+body:json {
+  {
+    "name": "{{productName}}",
+    "price": {{price}}
+  }
+}
+
+vars:pre-request {
+  productName: Nasi Goreng Pete
+  price: 18000
+  description: Nasi Goreng Spesial Perpaduan Ayam dan Sayuran
+}
+
+script:post-response {
+  // Save the product ID from response for subsequent requests
+  if (res.status === 201) {
+    const body = res.body;
+    if (body.id) {
+      bru.setEnvVar('productId', body.id);
+    }
+  }
+}

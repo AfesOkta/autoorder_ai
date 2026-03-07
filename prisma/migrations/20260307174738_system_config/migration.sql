@@ -1,0 +1,11 @@
+-- CreateEnum
+CREATE TYPE "AiProvider" AS ENUM ('OPENAI', 'GEMINI');
+
+-- CreateTable
+CREATE TABLE "system_configs" (
+    "key" TEXT NOT NULL,
+    "value" TEXT NOT NULL,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "system_configs_pkey" PRIMARY KEY ("key")
+);

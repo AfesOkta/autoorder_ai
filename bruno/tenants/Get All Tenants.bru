@@ -1,0 +1,15 @@
+meta {
+  name: Get All Tenants
+  type: http
+  uuid: tenants-getAll
+}
+
+get {
+  url: {{baseUrl}}/tenants
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{jwtToken}}
+}

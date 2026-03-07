@@ -1,0 +1,23 @@
+meta {
+  name: Get Message by ID
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/messages/{{messageId}}
+  body: none
+  auth: none
+}
+
+params:query {
+  : 
+}
+
+headers {
+  Authorization: Bearer {{jwtToken}}
+}
+
+vars:pre-request {
+  messageId: 66b1a5a9-41f6-4b77-ac72-c858de4ac081
+}

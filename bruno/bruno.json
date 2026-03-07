@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "AutoOrder AI API",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

@@ -1,0 +1,15 @@
+meta {
+  name: Get All Subscription Plans
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/subscriptions
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{jwtToken}}
+}

@@ -1,0 +1,15 @@
+meta {
+  name: Get Tenant by ID
+  type: http
+  uuid: tenants-getOne
+}
+
+get {
+  url: {{baseUrl}}/tenants/{{tenantId}}
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{jwtToken}}
+}

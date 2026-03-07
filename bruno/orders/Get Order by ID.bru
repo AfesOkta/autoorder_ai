@@ -1,0 +1,19 @@
+meta {
+  name: Get Order by ID
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/orders/{{orderId}}
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{jwtToken}}
+}
+
+vars:pre-request {
+  orderId: 66b1a5a9-41f6-4b77-ac72-c858de4ac081
+}

@@ -1,0 +1,35 @@
+meta {
+  name: Login
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/auth/login
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+       "email": "superadmin@autoorder-ai.com",
+       "password": "password123"
+     }
+}
+
+script:post-response {
+  // Save the JWT token from response for subsequent requests
+  if (res.status === 200 || res.status === 201) {
+    const body = res.body;
+    if (body.accessToken) {
+      bru.setEnvVar('jwtToken', body.accessToken);
+    }
+    if (body.user && body.user.superadmin_key) {
+      bru.setEnvVar('superadminKey', body.user.superadmin_key);
+    }
+  }
+}

@@ -1,0 +1,25 @@
+meta {
+  name: Update Product
+  type: http
+  uuid: products-update
+}
+
+put {
+  url: {{baseUrl}}/products/{{productId}}
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  Authorization: Bearer {{jwtToken}}
+}
+
+body:json {
+  {
+    "name": "{{productName}}",
+    "price": {{price}},
+    "description": "{{description}}",
+    "isActive": {{isActive}}
+  }
+}

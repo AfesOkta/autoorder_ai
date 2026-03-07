@@ -1,0 +1,35 @@
+meta {
+  name: Register
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/auth/register
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "tenantName": "Warung Makan Berkah",
+    "tenantPhone": "088989169332",
+    "email": "admin@warungberkah.com",
+    "password": "password123",
+    "subscriptionId": "{{subscriptionId}}"
+  }
+}
+
+script:post-response {
+  // Save the JWT token from response for subsequent requests
+  if (res.status === 201) {
+    const body = res.body;
+    if (body.accessToken) {
+      bru.setEnvVar('jwtToken', body.accessToken);
+    }
+  }
+}

@@ -1,0 +1,15 @@
+meta {
+  name: Get LLM Configuration
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/system-config/llm
+  body: none
+  auth: none
+}
+
+headers {
+  x-superadmin-key: {{superadminKey}}
+}

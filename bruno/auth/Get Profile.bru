@@ -1,0 +1,24 @@
+meta {
+  name: Get Profile
+  type: http
+  uuid: auth-me
+}
+
+get {
+  url: {{baseUrl}}/auth/me
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{jwtToken}}
+}
+
+script:post-response {
+  if (res.status === 200) {
+    const body = res.body;
+    if (body.superadmin_key) {
+      bru.setEnvVar('superadminKey', body.superadmin_key);
+    }
+  }
+}

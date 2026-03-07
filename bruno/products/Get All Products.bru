@@ -1,0 +1,19 @@
+meta {
+  name: Get All Products
+  type: http
+  uuid: products-getAll
+}
+
+get {
+  url: {{baseUrl}}/products
+  body: none
+  auth: none
+}
+
+params {
+  includeInactive: false
+}
+
+headers {
+  Authorization: Bearer {{jwtToken}}
+}

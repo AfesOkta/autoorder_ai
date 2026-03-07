@@ -1,0 +1,15 @@
+meta {
+  name: Get Subscription Plan by ID
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/subscriptions/{{subscriptionId}}
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{jwtToken}}
+}
