@@ -1,0 +1,16 @@
+meta {
+  name: Get All Messages
+  type: http
+  uuid: messages-getAll
+  method: GET
+  url: {{baseUrl}}/messages
+}
+
+params {
+  limit: 50
+  offset: 0
+}
+
+headers {
+  Authorization: Bearer {{jwtToken}}
+}

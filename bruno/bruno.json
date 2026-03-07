@@ -1,0 +1,240 @@
+{
+  "name": "AutoOrder AI API",
+  "version": "1.0.0",
+  "collections": [
+    {
+      "name": "AutoOrder AI API",
+      "uid": "autoorder-ai-api",
+      "requests": [
+        {
+          "type": "http",
+          "uid": "auth-register",
+          "name": "Register",
+          "method": "POST",
+          "url": "{{baseUrl}}/auth/register",
+          "body": {
+            "type": "json",
+            "json": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\",\n  \"name\": \"{{name}}\",\n  \"tenantName\": \"{{tenantName}}\"\n}",
+            "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\",\n  \"name\": \"{{name}}\",\n  \"tenantName\": \"{{tenantName}}\"\n}"
+          },
+          "headers": {
+            "Content-Type": "application/json"
+          }
+        },
+        {
+          "type": "http",
+          "uid": "auth-login",
+          "name": "Login",
+          "method": "POST",
+          "url": "{{baseUrl}}/auth/login",
+          "body": {
+            "type": "json",
+            "json": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}",
+            "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+          },
+          "headers": {
+            "Content-Type": "application/json"
+          }
+        },
+        {
+          "type": "http",
+          "uid": "auth-me",
+          "name": "Get Profile",
+          "method": "GET",
+          "url": "{{baseUrl}}/auth/me",
+          "headers": {
+            "Authorization": "Bearer {{jwtToken}}"
+          }
+        },
+        {
+          "type": "http",
+          "uid": "orders-getAll",
+          "name": "Get All Orders",
+          "method": "GET",
+          "url": "{{baseUrl}}/orders",
+          "params": {
+            "limit": "50",
+            "offset": "0"
+          },
+          "headers": {
+            "Authorization": "Bearer {{jwtToken}}"
+          }
+        },
+        {
+          "type": "http",
+          "uid": "orders-getOne",
+          "name": "Get Order by ID",
+          "method": "GET",
+          "url": "{{baseUrl}}/orders/{{orderId}}",
+          "headers": {
+            "Authorization": "Bearer {{jwtToken}}"
+          }
+        },
+        {
+          "type": "http",
+          "uid": "orders-updateStatus",
+          "name": "Update Order Status",
+          "method": "PUT",
+          "url": "{{baseUrl}}/orders/{{orderId}}/status",
+          "body": {
+            "type": "json",
+            "json": "{\n  \"status\": \"{{orderStatus}}\"\n}",
+            "raw": "{\n  \"status\": \"{{orderStatus}}\"\n}"
+          },
+          "headers": {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer {{jwtToken}}"
+          }
+        },
+        {
+          "type": "http",
+          "uid": "products-create",
+          "name": "Create Product",
+          "method": "POST",
+          "url": "{{baseUrl}}/products",
+          "body": {
+            "type": "json",
+            "json": "{\n  \"name\": \"{{productName}}\",\n  \"price\": {{price}},\n  \"description\": \"{{description}}\"\n}",
+            "raw": "{\n  \"name\": \"{{productName}}\",\n  \"price\": {{price}},\n  \"description\": \"{{description}}\"\n}"
+          },
+          "headers": {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer {{jwtToken}}"
+          }
+        },
+        {
+          "type": "http",
+          "uid": "products-getAll",
+          "name": "Get All Products",
+          "method": "GET",
+          "url": "{{baseUrl}}/products",
+          "params": {
+            "includeInactive": "false"
+          },
+          "headers": {
+            "Authorization": "Bearer {{jwtToken}}"
+          }
+        },
+        {
+          "type": "http",
+          "uid": "products-getOne",
+          "name": "Get Product by ID",
+          "method": "GET",
+          "url": "{{baseUrl}}/products/{{productId}}",
+          "headers": {
+            "Authorization": "Bearer {{jwtToken}}"
+          }
+        },
+        {
+          "type": "http",
+          "uid": "products-update",
+          "name": "Update Product",
+          "method": "PUT",
+          "url": "{{baseUrl}}/products/{{productId}}",
+          "body": {
+            "type": "json",
+            "json": "{\n  \"name\": \"{{productName}}\",\n  \"price\": {{price}},\n  \"description\": \"{{description}}\",\n  \"isActive\": {{isActive}}\n}",
+            "raw": "{\n  \"name\": \"{{productName}}\",\n  \"price\": {{price}},\n  \"description\": \"{{description}}\",\n  \"isActive\": {{isActive}}\n}"
+          },
+          "headers": {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer {{jwtToken}}"
+          }
+        },
+        {
+          "type": "http",
+          "uid": "products-delete",
+          "name": "Delete Product",
+          "method": "DELETE",
+          "url": "{{baseUrl}}/products/{{productId}}",
+          "headers": {
+            "Authorization": "Bearer {{jwtToken}}"
+          }
+        },
+        {
+          "type": "http",
+          "uid": "messages-getAll",
+          "name": "Get All Messages",
+          "method": "GET",
+          "url": "{{baseUrl}}/messages",
+          "params": {
+            "limit": "50",
+            "offset": "0"
+          },
+          "headers": {
+            "Authorization": "Bearer {{jwtToken}}"
+          }
+        },
+        {
+          "type": "http",
+          "uid": "messages-getOne",
+          "name": "Get Message by ID",
+          "method": "GET",
+          "url": "{{baseUrl}}/messages/{{messageId}}",
+          "headers": {
+            "Authorization": "Bearer {{jwtToken}}"
+          }
+        },
+        {
+          "type": "http",
+          "uid": "tenants-getAll",
+          "name": "Get All Tenants",
+          "method": "GET",
+          "url": "{{baseUrl}}/tenants",
+          "headers": {
+            "Authorization": "Bearer {{jwtToken}}"
+          }
+        },
+        {
+          "type": "http",
+          "uid": "tenants-getOne",
+          "name": "Get Tenant by ID",
+          "method": "GET",
+          "url": "{{baseUrl}}/tenants/{{tenantId}}",
+          "headers": {
+            "Authorization": "Bearer {{jwtToken}}"
+          }
+        },
+        {
+          "type": "http",
+          "uid": "webhook-whatsapp",
+          "name": "WhatsApp Webhook",
+          "method": "POST",
+          "url": "{{baseUrl}}/webhook/whatsapp",
+          "body": {
+            "type": "json",
+            "json": "{\n  \"messages\": [\n    {\n      \"key\": {\n        \"id\": \"{{messageKeyId}}\",\n        \"remoteJid\": \"{{remoteJid}}\"\n      },\n      \"message\": {\n        \"conversation\": \"{{messageText}}\"\n      },\n      \"pushName\": \"{{pushName}}\"\n    }\n  ]\n}",
+            "raw": "{\n  \"messages\": [\n    {\n      \"key\": {\n        \"id\": \"{{messageKeyId}}\",\n        \"remoteJid\": \"{{remoteJid}}\"\n      },\n      \"message\": {\n        \"conversation\": \"{{messageText}}\"\n      },\n      \"pushName\": \"{{pushName}}\"\n    }\n  ]\n}"
+          },
+          "headers": {
+            "Content-Type": "application/json",
+            "x-whatsapp-phone": "{{tenantPhone}}"
+          }
+        }
+      ]
+    }
+  ],
+  "environments": [
+    {
+      "uid": "dev",
+      "name": "Development",
+      "variables": {
+        "baseUrl": "http://localhost:3000"
+      }
+    },
+    {
+      "uid": "prod",
+      "name": "Production",
+      "variables": {
+        "baseUrl": "https://your-production-url.com"
+      }
+    }
+  ],
+  "presets": {
+    "request": {
+      "headers": {
+        "Content-Type": "application/json"
+      }
+    }
+  }
+}

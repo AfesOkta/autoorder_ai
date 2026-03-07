@@ -1,0 +1,11 @@
+meta {
+  name: Get Message by ID
+  type: http
+  uuid: messages-getOne
+  method: GET
+  url: {{baseUrl}}/messages/{{messageId}}
+}
+
+headers {
+  Authorization: Bearer {{jwtToken}}
+}

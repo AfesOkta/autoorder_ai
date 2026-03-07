@@ -1,0 +1,11 @@
+meta {
+  name: Delete Product
+  type: http
+  uuid: products-delete
+  method: DELETE
+  url: {{baseUrl}}/products/{{productId}}
+}
+
+headers {
+  Authorization: Bearer {{jwtToken}}
+}

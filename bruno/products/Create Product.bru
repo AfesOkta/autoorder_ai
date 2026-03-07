@@ -1,0 +1,30 @@
+meta {
+  name: Create Product
+  type: http
+  uuid: products-create
+  method: POST
+  url: {{baseUrl}}/products
+}
+
+headers {
+  Content-Type: application/json
+  Authorization: Bearer {{jwtToken}}
+}
+
+body:json {
+  {
+    "name": "{{productName}}",
+    "price": {{price}},
+    "description": "{{description}}"
+  }
+}
+
+script:post-response {
+  // Save the product ID from response for subsequent requests
+  if (res.status === 201) {
+    const body = res.body;
+    if (body.id) {
+      bru.setEnvVar('productId', body.id);
+    }
+  }
+}

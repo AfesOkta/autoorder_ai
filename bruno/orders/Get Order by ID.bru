@@ -1,0 +1,11 @@
+meta {
+  name: Get Order by ID
+  type: http
+  uuid: orders-getOne
+  method: GET
+  url: {{baseUrl}}/orders/{{orderId}}
+}
+
+headers {
+  Authorization: Bearer {{jwtToken}}
+}

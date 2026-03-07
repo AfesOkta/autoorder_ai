@@ -1,0 +1,18 @@
+meta {
+  name: Update Order Status
+  type: http
+  uuid: orders-updateStatus
+  method: PUT
+  url: {{baseUrl}}/orders/{{orderId}}/status
+}
+
+headers {
+  Content-Type: application/json
+  Authorization: Bearer {{jwtToken}}
+}
+
+body:json {
+  {
+    "status": "{{orderStatus}}"
+  }
+}

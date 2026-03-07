@@ -1,0 +1,16 @@
+meta {
+  name: Get All Orders
+  type: http
+  uuid: orders-getAll
+  method: GET
+  url: {{baseUrl}}/orders
+}
+
+params {
+  limit: 50
+  offset: 0
+}
+
+headers {
+  Authorization: Bearer {{jwtToken}}
+}

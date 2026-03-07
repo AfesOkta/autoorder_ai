@@ -1,0 +1,11 @@
+meta {
+  name: Get Profile
+  type: http
+  uuid: auth-me
+  method: GET
+  url: {{baseUrl}}/auth/me
+}
+
+headers {
+  Authorization: Bearer {{jwtToken}}
+}

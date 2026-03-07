@@ -1,0 +1,11 @@
+meta {
+  name: Get Product by ID
+  type: http
+  uuid: products-getOne
+  method: GET
+  url: {{baseUrl}}/products/{{productId}}
+}
+
+headers {
+  Authorization: Bearer {{jwtToken}}
+}

@@ -1,0 +1,30 @@
+meta {
+  name: Register
+  type: http
+  uuid: auth-register
+  method: POST
+  url: {{baseUrl}}/auth/register
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "email": "{{email}}",
+    "password": "{{password}}",
+    "name": "{{name}}",
+    "tenantName": "{{tenantName}}"
+  }
+}
+
+script:post-response {
+  // Save the JWT token from response for subsequent requests
+  if (res.status === 201) {
+    const body = res.body;
+    if (body.access_token) {
+      bru.setEnvVar('jwtToken', body.access_token);
+    }
+  }
+}

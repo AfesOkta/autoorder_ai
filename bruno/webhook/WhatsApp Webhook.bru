@@ -1,0 +1,29 @@
+meta {
+  name: WhatsApp Webhook
+  type: http
+  uuid: webhook-whatsapp
+  method: POST
+  url: {{baseUrl}}/webhook/whatsapp
+}
+
+headers {
+  Content-Type: application/json
+  x-whatsapp-phone: {{tenantPhone}}
+}
+
+body:json {
+  {
+    "messages": [
+      {
+        "key": {
+          "id": "{{messageKeyId}}",
+          "remoteJid": "{{remoteJid}}"
+        },
+        "message": {
+          "conversation": "{{messageText}}"
+        },
+        "pushName": "{{pushName}}"
+      }
+    ]
+  }
+}
