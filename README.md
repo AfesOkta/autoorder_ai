@@ -2,196 +2,101 @@
 
 Production-ready MVP backend for AutoOrder AI - a SaaS platform that converts WhatsApp messages from customers into structured orders using AI.
 
-## Features
+## 📖 Documentation
+- **[Step-by-Step Tutorial](plans/tutorial.md)** - Learn how to use the system from setup to order.
 
-- **Multi-tenant SaaS Architecture** - Each UMKM (small business) is a tenant
-- **WhatsApp Webhook Integration** - Receive messages from WhatsApp gateway (Fonnte)
-- **AI Order Parsing** - Uses OpenAI GPT-4o-mini to parse customer messages
-- **Product Menu Management** - CRUD operations for products
-- **Order Management** - Track and manage orders
-- **JWT Authentication** - Secure API access
-- **Queue System** - BullMQ + Redis for async processing
-- **Docker Support** - Easy deployment with Docker Compose
-- **CI/CD** - GitHub Actions workflow included
+## 🌟 Features
 
-## Tech Stack
+- **Multi-tenant SaaS Architecture** - Each UMKM (small business) is a tenant.
+- **Subscription Management** - Create and manage different subscription plans.
+- **Role-Based Access Control (RBAC)** - Secure endpoints with `SUPERADMIN`, `ADMIN`, and `STAFF` roles.
+- **System Configuration** - Global settings for LLM providers (OpenAI, Gemini).
+- **WhatsApp Webhook Integration** - Receive messages from WhatsApp gateway (Fonnte).
+- **AI Order Parsing** - Uses OpenAI GPT-4o-mini to parse customer messages.
+- **Product Menu Management** - CRUD operations for products.
+- **Order Management** - Track and manage orders.
+- **JWT Authentication** - Secure API access with automated token handling.
+- **Queue System** - BullMQ + Redis for async processing.
+- **Docker Support** - Easy deployment with Docker Compose.
+
+## 🛠️ Tech Stack
 
 - **Backend**: NestJS (TypeScript)
 - **Database**: PostgreSQL
 - **ORM**: Prisma
 - **Queue**: Redis + BullMQ
 - **AI**: OpenAI API (GPT-4o-mini)
-- **Auth**: JWT
+- **Auth**: JWT + RBAC
 
-## Quick Start
+## 🚀 Quick Start
 
 ### Prerequisites
-
 - Node.js 20+
 - PostgreSQL 16+
 - Redis 7+
 - OpenAI API Key
 
 ### Local Setup
-
 1. **Clone and install dependencies:**
-
-```bash
-npm install
-```
-
+   ```bash
+   npm install
+   ```
 2. **Copy environment file:**
-
-```bash
-cp .env.example .env
-```
-
+   ```bash
+   cp .env.example .env
+   ```
 3. **Configure environment variables:**
-
-```env
-DATABASE_URL="postgresql://postgres:postgres@localhost:5432/autoorder_ai"
-REDIS_HOST="localhost"
-REDIS_PORT="6379"
-JWT_SECRET="your-secret-key"
-OPENAI_API_KEY="sk-your-api-key"
-PORT=3000
-```
-
+   Edit `.env` with your `DATABASE_URL`, `REDIS_HOST`, `JWT_SECRET`, and `OPENAI_API_KEY`.
 4. **Generate Prisma Client:**
-
-```bash
-npx prisma generate
-```
-
+   ```bash
+   npx prisma generate
+   ```
 5. **Run database migrations:**
-
-```bash
-npx prisma migrate dev
-```
-
+   ```bash
+   npx prisma migrate dev
+   ```
 6. **Start development server:**
+   ```bash
+   npm run start:dev
+   ```
 
-```bash
-npm run start:dev
-```
-
-### Docker Setup
-
-1. **Create .env file:**
-
-```bash
-cp .env.example .env
-```
-
-2. **Edit .env with your values:**
-
-```env
-DATABASE_URL="postgresql://postgres:postgres@db:5432/autoorder_ai"
-REDIS_HOST="redis"
-REDIS_PORT="6379"
-JWT_SECRET="your-secret-key"
-OPENAI_API_KEY="sk-your-api-key"
-```
-
-3. **Start services:**
-
-```bash
-docker-compose up -d
-```
-
-## API Endpoints
+## 📡 API Endpoints
 
 ### Auth
-
 - `POST /auth/register` - Register new tenant and admin user
-- `POST /auth/login` - Login and get JWT token
+- `POST /auth/login` - Login and get JWT token (saves Superadmin key if applicable)
 - `GET /auth/me` - Get current user profile
 
-### Products (Protected)
+### Subscription Plans (Superadmin/Admin only)
+- `GET /subscriptions` - List all plans
+- `POST /subscriptions` - Create a plan
+- `PATCH /subscriptions/:id` - Update a plan
+- `DELETE /subscriptions/:id` - Delete a plan
 
+### System Config (Superadmin only)
+- `GET /system-config/llm` - Get global LLM config
+- `PUT /system-config/llm` - Set global LLM config
+
+### Products (Tenant Protected)
 - `GET /products` - List products
 - `POST /products` - Create product
 - `PUT /products/:id` - Update product
 - `DELETE /products/:id` - Soft delete product
 
-### Orders (Protected)
-
+### Orders (Tenant Protected)
 - `GET /orders` - List orders
 - `GET /orders/:id` - Get order details
 - `PUT /orders/:id/status` - Update order status
 
-### Messages (Protected)
-
-- `GET /messages` - List messages
-- `GET /messages/:id` - Get message details
-
 ### Webhook (Public)
+- `POST /webhook/whatsapp` - Receive WhatsApp messages from Fonnte
 
-- `POST /webhook/whatsapp` - Receive WhatsApp messages
-
-## WhatsApp Webhook Payload
-
-```json
-{
-  "sender": "62812345678",
-  "message": "2 ayam geprek 1 es teh"
-}
-```
-
-## Example Usage
-
-1. **Register a new tenant:**
-
-```bash
-curl -X POST http://localhost:3000/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{
-    "tenantName": "Kedai Ayam Goreng",
-    "tenantPhone": "62812345678",
-    "email": "admin@kedai.com",
-    "password": "password123"
-  }'
-```
-
-2. **Login:**
-
-```bash
-curl -X POST http://localhost:3000/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{
-    "email": "admin@kedai.com",
-    "password": "password123"
-  }'
-```
-
-3. **Create a product:**
-
-```bash
-curl -X POST http://localhost:3000/products \
-  -H "Authorization: Bearer <token>" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "Ayam Geprek",
-    "price": 15000
-  }'
-```
-
-4. **Receive WhatsApp order:**
-
-```bash
-curl -X POST http://localhost:3000/webhook/whatsapp \
-  -H "Content-Type: application/json" \
-  -d '{
-    "sender": "628987654321",
-    "message": "2 ayam geprek 1 es teh"
-  }'
-```
-
-## Project Structure
-
+## 📂 Project Structure
 ```
 src/
-├── auth/           # Authentication module
+├── auth/           # Auth, Roles Guard, JWT Strategy
+├── subscription/   # Subscription Plans
+├── system-config/  # Global Settings
 ├── tenant/         # Tenant management
 ├── products/       # Product CRUD
 ├── messages/       # Message storage
@@ -199,9 +104,11 @@ src/
 ├── webhook/        # WhatsApp webhook
 ├── queue/          # BullMQ queue
 ├── ai-parser/      # AI message parser
-└── config/         # Configuration
+└── prisma/         # Prisma Service & Module
 ```
 
-## License
+## 🧪 Testing with Bruno
+A comprehensive Bruno collection is available in the `bruno/` directory, organized by module.
 
-MIT
+---
+License: MIT
