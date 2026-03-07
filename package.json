@@ -23,6 +23,9 @@
     "prisma:push": "prisma db push",
     "prisma:studio": "prisma studio"
   },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
   "dependencies": {
     "@google/generative-ai": "^0.21.0",
     "@nestjs/bull": "^10.2.3",

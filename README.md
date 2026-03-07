@@ -55,7 +55,11 @@ Production-ready MVP backend for AutoOrder AI - a SaaS platform that converts Wh
    ```bash
    npx prisma migrate dev
    ```
-6. **Start development server:**
+6. **Run database seed:**
+   ```bash
+   npx prisma db seed
+   ```   
+7. **Start development server:**
    ```bash
    npm run start:dev
    ```
