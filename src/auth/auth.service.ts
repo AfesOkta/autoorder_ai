@@ -112,7 +112,7 @@ export class AuthService {
           tenantId: tenant.id,
           email,
           password: hashedPassword,
-          role: "ADMIN",
+          role: "TENANT",
         },
       });
 

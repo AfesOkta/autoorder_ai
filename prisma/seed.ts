@@ -33,7 +33,7 @@ async function main() {
       password: '$2b$10$jIabyGkuA3Diyp4vbJIay.5OUneSpmNEdTGtT9YWgLAhRfT5d1jp2',
       role: UserRole.SUPERADMIN,
       superadminKey: '74c055a08d4053b4f694deee3d0e0d477a7691bf311285f72d9b2c7918193f22',
-    } as any, // Cast to any due to possible out-of-sync types
+    },
   });
 
   console.log('Seed: Superadmin user created/updated');
@@ -48,8 +48,7 @@ async function main() {
       email: 'admin@autoorder-ai.com',
       password: '$2b$10$jIabyGkuA3Diyp4vbJIay.5OUneSpmNEdTGtT9YWgLAhRfT5d1jp2',
       role: UserRole.ADMIN,
-      superadminKey: '74c055a08d4053b4f694deee3d0e0d477a7691bf311285f72d9b2c7918193f22',
-    } as any,
+    },
   });
 
   console.log('Seed: Admin user created/updated');
